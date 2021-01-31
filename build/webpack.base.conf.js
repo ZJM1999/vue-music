@@ -23,9 +23,11 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json',],
     alias: {
-      '@': resolve('src'),
+      'src': resolve('src'),
+      'common':resolve('src/common'),
+      'components':resolve('src/components')
     }
   },
   module: {
@@ -63,11 +65,6 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      },
-      {
-        test:/\.less$/,
-        loader:['style-loader','css-loader','less-loader']
-
       }
     ]
   },
