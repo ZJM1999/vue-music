@@ -22,5 +22,5 @@ function handle(data){
     //考虑data中属性值为空的情况
     url+= (data[key]!==undefined)?`&${key}=${encodeURIComponent(data[key])}`:''
   }
-  return url
+  return url?url.substring(1):''
 }
