@@ -2,8 +2,14 @@
   <div class="recommend">
     <div class="recommend-content">
       <!-- 轮播图 -->
-      <div class="slider-wrapper">
-        
+      <div v-if="slider.length" class="slider-wrapper">
+        <slider>
+          <div v-for="item in slider" :key="item.id">
+            <a :href="item.linkUrl">
+              <img :src="item.picUrl">
+            </a>
+          </div>
+        </slider>
       </div>
       <!-- 歌单列表 -->
       <div class="recommend-list">
@@ -17,7 +23,8 @@
 </template>
 
 <script>
-import {getSlider} from 'netWork/recommend'
+import {getSlider} from 'netWork/recommend';
+import Slider from 'base/slider/slider'
 export default {
   data(){
     return {
@@ -32,6 +39,9 @@ export default {
         this.slider = result.data.slider
       }
     })
+  },
+  components:{
+    Slider
   }
 }
 </script>
