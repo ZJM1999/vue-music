@@ -35,13 +35,12 @@ export default {
     }
   },
   mounted(){
-    this.$nextTick(()=>{
+    setTimeout(() => {
+      if(!this.$refs) return
       this.setSliderWidth()
       this.initSlider()
       this.autoPlay()
-
-      
-    })
+    }, 20);
     
   },
   methods:{
@@ -106,7 +105,11 @@ export default {
       }
     }
     
-  }
+  },
+  destroyed() {
+    //组件销毁清除残留
+    clearTimeout(this.timer)
+  },
 }
 </script>
 
