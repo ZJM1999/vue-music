@@ -1,9 +1,8 @@
-import axios from 'axios'
 import jsonp from 'common/js/jsonp'
 
 //获取轮播图数据
 export  function getSlider(){
-  let url = 'http://192.168.1.101:3000/getSlider'
+  let url = 'http://localhost:3000/getSlider'
   let data = {
     callback:'_jp1'
   }
@@ -12,7 +11,7 @@ export  function getSlider(){
 
 //获取歌单列表数据
 export function getMusicList (){
-  let url = 'http://192.168.1.101:3000/getMusicList'
+  let url = 'http://localhost:3000/getMusicList'
   let data = {
     callback:'_jp2'
   }

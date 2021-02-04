@@ -15,6 +15,10 @@
         <!-- 歌单列表 -->
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
+            <!-- loading组件 -->
+          <div class="loading-container" v-if="!musicList.length">
+            <loading></loading>
+          </div>
           <ul>
             <li class="list-item" v-for="item in musicList" :key="item.dissid">
               <div class="list-img">
@@ -27,6 +31,7 @@
             </li>
           </ul>
         </div>
+        
       </div>
     </scroll>
   </div>
@@ -39,6 +44,7 @@ import {getSlider,getMusicList} from 'netWork/recommend';
 //组件
 import Slider from 'base/slider/slider'
 import Scroll from 'base/scroll/scroll'
+import Loading from 'base/loading/loading';
 
 export default {
   data(){
@@ -59,13 +65,17 @@ export default {
       }
     })
     //请求歌单数据
-    getMusicList().then((result)=>{
-      if(result.code === 0){
-        this.musicList = result.data.list
-      }
-    })
+      this.getList()
   },
   methods:{
+    getList(){
+      getMusicList().then((result)=>{
+        if(result.code === 0){
+          this.musicList = result.data.list
+          this.$refs.scrollRef.refresh()
+        }
+      })
+    },
     //图片加载完成的时候调用一次refresh，重新刷新scroll组件计算高度
     getImg(){
       if(this.isRefresh){
@@ -76,7 +86,8 @@ export default {
   },
   components:{
     Slider,
-    Scroll
+    Scroll,
+    Loading
   }
 }
 </script>
@@ -94,6 +105,10 @@ export default {
     text-align: center;
     font-size: 14px;
     color: @color-theme;
+  }
+  .loading-container{
+    position: relative;
+    height: 200px;
   }
   .list-item{
     display: flex;
