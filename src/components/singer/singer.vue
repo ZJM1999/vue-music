@@ -1,12 +1,16 @@
 <template>
   <div class="singer">
-    <h1>歌手</h1>
+    <listview :datas="singerList"></listview>
   </div>
 </template>
 
 <script>
 import {getSingerList} from 'netWork/singer'
 import Singer from 'common/js/singer'
+//组件
+import Listview from 'base/lisrview/listview.vue'
+
+
 export default {
   data(){
     return{
@@ -72,6 +76,10 @@ export default {
           this.singerList = map
       })
     }
+    
+  },
+  components:{
+    Listview
   }
 }
 </script>
