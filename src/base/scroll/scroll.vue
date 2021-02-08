@@ -18,8 +18,16 @@ export default {
     },
     probeType:{
       type:Number,
-      default:1
+      default:3
+    },
+    //是否滚动
+    listenerScroll:{
+      type:Boolean,
+      default:false
     }
+  },
+  mounted(){
+      
   },
   methods:{
     //初始化better-scroll
@@ -29,6 +37,12 @@ export default {
         probeType:this.probeType,
         click:this.click
       })
+      //监听滚动事件
+      if(this.listenerScroll){
+        this.scroll.on('scroll',(pos)=>{
+          this.$emit('scroll',pos)
+        })
+      }
     },
     //代理refresh方法，以供外部使用
     refresh(){
@@ -45,13 +59,15 @@ export default {
     //代理goToPage方法
     goToPage(){
       this.scroll&&this.scroll.goToPage.apply(this.scroll,arguments)
-    }
+    },
+    
   },
   watch:{
     //当外部传入的data数据发生变化立即刷新滚动组件重新计算正确高度
     data(){
       this.$nextTick(()=>{
         this.initScroll()
+        
       })
     }
     
