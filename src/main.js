@@ -3,6 +3,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
+import store from 'src/store/index'
 //图片懒加载
 import VueLazyLoad from 'vue-lazyload'
 
@@ -22,5 +23,6 @@ fastClick.attach(document.body)
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })

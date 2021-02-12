@@ -11,7 +11,7 @@
           <span>{{item.title}}</span>
         </div>
         <ul class="group-list">
-          <li v-for="(i,k) in item.items" :key="k">
+          <li @click="selectSinger(i)" v-for="(i,k) in item.items" :key="k">
             <img v-lazy="i.avator" alt="">
             <span>{{i.name}}</span>
           </li>
@@ -19,7 +19,7 @@
       </li>
     </ul>
     <!-- 吸顶固定的title -->
-    <div class="group-item fixed-title" v-show="height<0">
+    <div class="group-item fixed-title" v-show="height<0" ref="fixedRef">
       <span>{{name}}</span>
     </div>
     <!-- 右侧指向条 -->
@@ -57,7 +57,18 @@ export default {
       //吸顶title的name
       name:'热门',
       //滚动时，当前li的高度
-      height:0
+      height:0,
+      fixedTop:0
+    }
+  },
+  watch:{
+    fixedTop(newVal){
+      if(newVal<30){
+        let fixedTop = newVal - 30
+        this.$refs.fixedRef.style.transform = `translateY(${fixedTop}px)`
+      }else{
+        this.$refs.fixedRef.style.transform = 'translateY(0)'
+      }
     }
   },
   created(){
@@ -113,9 +124,15 @@ export default {
         let heightEnd = listHeightArr[i+1]
         if(-this.height>heightStart&&-this.height<heightEnd){
           this.currentIndex = i
+          this.fixedTop = heightEnd + this.height
           this.name = this.getShortcutArr[i] ==='热'?'热门':this.getShortcutArr[i]
         }
       }
+    },
+    //派发点击进入详情页界面事件
+    selectSinger(item){
+      //只派发不写业务代码
+      this.$emit('select',item)
     }
   }
 }

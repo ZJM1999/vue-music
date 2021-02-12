@@ -9,6 +9,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const express = require('express')
+const app = express()
+const axios = require('axios')
+const apiRouters = express.Router()
+app.use('/api',apiRouters)
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -42,6 +47,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before(app){
+      app.get('/api/detail',(req,res)=>{
+        let url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_singer_track_cp.fcg'
+        axios.get(url,{
+          headers:{
+            referer:'https://c.y.qq.com/',
+            host:'c.y.qq.com'
+          },
+          params:req.query
+        }).then((result)=>{
+          res.end(result.data)
+        }).catch((err)=>{
+          console.log('错误',err);
+        })
+      })
     }
   },
   plugins: [

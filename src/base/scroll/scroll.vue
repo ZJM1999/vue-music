@@ -60,7 +60,6 @@ export default {
     goToPage(){
       this.scroll&&this.scroll.goToPage.apply(this.scroll,arguments)
     },
-    
   },
   watch:{
     //当外部传入的data数据发生变化立即刷新滚动组件重新计算正确高度

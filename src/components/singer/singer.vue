@@ -1,12 +1,14 @@
 <template>
   <div class="singer">
-    <listview :datas="singerList"></listview>
+    <listview :datas="singerList" @select="select"></listview>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import {getSingerList} from 'netWork/singer'
 import Singer from 'common/js/singer'
+import {mapMutations} from 'vuex'
 //组件
 import Listview from 'base/lisrview/listview.vue'
 
@@ -75,8 +77,18 @@ export default {
           map = hot.concat(res)
           this.singerList = map
       })
-    }
-    
+    },
+    //调用listview派发的点击进入详情页事件
+    select(singer){
+        this.$router.push({
+        path:`/singer/${singer.id}`
+      })
+      this.setSinger(singer)
+    },
+    //vuex
+    ...mapMutations({
+      setSinger:"GET_SINGER"
+    })
   },
   components:{
     Listview
