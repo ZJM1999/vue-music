@@ -1,7 +1,9 @@
 <template>
   <div class="singer">
     <listview :datas="singerList" @select="select"></listview>
-    <router-view></router-view>
+    <transition>
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -102,5 +104,13 @@ export default {
     bottom: 0;
     top: 88px;
     width: 100%;
+  }
+  .v-enter,
+  .v-leave-to{
+    transform: translateX(100%);
+  }
+  .v-enter-active,
+  .v-leave-active{
+    transition: all .1s ease;
   }
 </style>

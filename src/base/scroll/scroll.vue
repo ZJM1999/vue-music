@@ -27,7 +27,9 @@ export default {
     }
   },
   mounted(){
-      
+      setTimeout(() => {
+        this.initScroll()
+      }, 20);
   },
   methods:{
     //初始化better-scroll
@@ -64,10 +66,10 @@ export default {
   watch:{
     //当外部传入的data数据发生变化立即刷新滚动组件重新计算正确高度
     data(){
-      this.$nextTick(()=>{
+      setTimeout(()=>{
         this.initScroll()
-        
-      })
+        this.refresh()
+      },20)
     }
     
     
@@ -77,7 +79,7 @@ export default {
 
 <style lang="less" scoped>
   .wrapper{
-    overflow: hidden;
+    // overflow: hidden;
     height: 100%;
   }
 </style>

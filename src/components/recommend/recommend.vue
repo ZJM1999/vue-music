@@ -62,6 +62,7 @@ export default {
     getSlider().then((result)=>{
       if(result.code === 0){
         this.slider = result.data.slider
+        console.log(this.slider);
       }
     })
     //请求歌单数据
@@ -101,6 +102,7 @@ export default {
     width: 100%;
     top: 88px;
     bottom: 0;
+    overflow: hidden;
   }
   .list-title{
     padding: 26px;

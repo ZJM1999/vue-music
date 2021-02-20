@@ -7,6 +7,12 @@ import details from 'components/singer/children/detail-singer'
 import rank from 'components/rank/rank'
 import search from 'components/search/search'
 
+//解决重复点击路由报错问题
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(Router)
 
 export default new Router({

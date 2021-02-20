@@ -142,6 +142,7 @@ export default {
   @import '~common/less/standard';
   .listview{
     transform: translate(0);
+    overflow: hidden;
     .fixed-title{
       width: 100%;
       position: fixed;

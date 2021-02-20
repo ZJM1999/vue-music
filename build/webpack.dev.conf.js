@@ -63,6 +63,20 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           console.log('错误',err);
         })
       })
+      app.get('/api/song',(req,res)=>{
+        let url = 'https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg'
+        axios.get(url,{
+          headers:{
+            referer:'https://c.y.qq.com/',
+            host:'c.y.qq.com'
+          },
+          params:req.query
+        }).then((result)=>{
+          res.json(result.data)
+        }).catch((err)=>{
+          console.log('错误',err);
+        })
+      })
     }
   },
   plugins: [

@@ -24,9 +24,11 @@ export default {
     transform: translate(-50%,-50%);
     img{
       width: 50px;
+      padding-left: 8px;
     }
     p{
       font-size: 13px;
+      color: #ffcd32;
     }
   }
 </style>
