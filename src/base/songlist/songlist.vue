@@ -1,7 +1,7 @@
 <template>
   <div class="song-list">
     <ul>
-      <li class="song-item" v-for="(item,index) in songList" :key="index">
+      <li class="song-item" @click="showSongview" v-for="(item,index) in songList" :key="index">
         <h2>{{item.name}}</h2>
         <p>{{item.singer}}·{{item.album}}</p>
       </li>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import{mapMutations} from 'vuex'
 export default {
   props:{
     songList:{
@@ -18,6 +19,14 @@ export default {
     }
   },
   mounted(){
+  },
+  methods:{
+    showSongview(){
+      this.setIsMini(true)
+    },
+    ...mapMutations({
+      setIsMini:'SET_ISMINI'
+    })
   }
 }
 </script>

@@ -9,7 +9,15 @@ import createLogger from 'vuex/dist/logger'
 Vue.use(Vuex)
 
 const state = {
-  singer:{}
+  singer:{},
+  //歌单列表
+  songList:[],
+  //播放列表
+  list:[],
+  //是否收起
+  isMini:false,
+  //是否播放
+  isSong:false
 }
 //检测是否为生产环境
 const debug = process.env.NODE_ENV !== 'production'
