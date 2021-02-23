@@ -14,6 +14,12 @@ const mutations = {
   },
   [types.SET_ISSONG](state,flog){
     state.isSong = flog
+  },
+  [types.SET_CURRENTINDEX](state,index){
+    state.currentIndex = index
+  },
+  [types.SET_CURRENTSONG](state){
+    state.currentSong=state.songList[state.currentIndex]
   }
 }
 

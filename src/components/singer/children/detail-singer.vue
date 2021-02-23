@@ -70,7 +70,11 @@ export default {
   },
   created(){
     //请求歌手详情数据且对数据进行处理
-    getSingerDetail(this.getSinger.id).then(result=>{
+    let id = this.getSinger.id
+    if(this.getSinger.id ===undefined){
+      id = this.$route.params.id
+    }
+    getSingerDetail(id).then(result=>{
       let i = result.data.trim().indexOf('{')+1
       let length = result.data.trim().length
       let data =JSON.parse(result.data.substring(i,length))
@@ -79,12 +83,15 @@ export default {
       this.list.forEach((item)=>{
         this.songList.push(createSong(item.musicData))
       })
+      console.log(this.songList);
       this.detailUrl = `https://y.gtimg.cn/music/photo_new/T001R300x300M000${this.list[0].musicData.singer[0].mid}.jpg?max_age=2592000`
       this.$refs.bgimageRef.style['background-image'] = `url(${this.detailUrl})`
     })
+    
+    
     //请求播放数据vkey
     getSong('000BZ9Fg16MAU2').then(result=>{
-      console.log(result);
+      // console.log(result);
     })
   },
   methods:{

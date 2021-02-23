@@ -1,7 +1,7 @@
 <template>
   <div class="song-list">
     <ul>
-      <li class="song-item" @click="showSongview" v-for="(item,index) in songList" :key="index">
+      <li class="song-item" @click="showSongview(index)" v-for="(item,index) in songList" :key="index">
         <h2>{{item.name}}</h2>
         <p>{{item.singer}}·{{item.album}}</p>
       </li>
@@ -21,11 +21,19 @@ export default {
   mounted(){
   },
   methods:{
-    showSongview(){
+    showSongview(index){
       this.setIsMini(true)
+      this.setSongList(this.songList)
+      this.setCurrentIndex(index)
+      this.setCurrentSong()
+      this.setIsSong(true)
     },
     ...mapMutations({
-      setIsMini:'SET_ISMINI'
+      setIsMini:'SET_ISMINI',
+      setSongList:'SET_SONGLIST',
+      setCurrentIndex:'SET_CURRENTINDEX',
+      setCurrentSong:'SET_CURRENTSONG',
+      setIsSong:'SET_ISSONG'
     })
   }
 }

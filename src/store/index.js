@@ -17,7 +17,11 @@ const state = {
   //是否收起
   isMini:false,
   //是否播放
-  isSong:false
+  isSong:true,
+  //当前歌曲索引
+  currentIndex:-1,
+  //当前歌曲
+  currentSong:{}
 }
 //检测是否为生产环境
 const debug = process.env.NODE_ENV !== 'production'
